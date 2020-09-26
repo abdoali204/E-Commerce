@@ -1,0 +1,13 @@
+<div class="crop"
+     [style.width.px]="starWidth"
+     [title]="rating"
+    >
+     <ul class="list-inline rating-list" 
+     *ngFor="let star of stars" style="display: inline-block" >
+       <li 
+       (click)="onStarClick(star)"
+           [ngClass]="{'text-warning': (star <= rating)}">
+         <i class="fa fa-star"></i>
+       </li> 
+ </ul>
+</div>

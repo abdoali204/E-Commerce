@@ -1,0 +1,63 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item active">
+        <button class="nav-link" (click) = "onChangeOption(1)">Details</button>
+    </li>
+    <li class="nav-item" (click) = "onChangeOption(2)">
+        <button  class="nav-link" id="photosBtn">Photos</button>
+    </li>
+</ul>
+<div class="mt-4" id="displayingOptions">
+    <div id="details"  *ngIf="options == 1">
+        <h2 class="font-weight-bold">Details:</h2>
+        <div>
+            <ul>
+                <li>
+                    <label>Name:</label>
+                    <span>{{product.name}}</span>
+                </li>
+                <li>
+                    <label>Name:</label>
+                    <span>{{product.name}}</span>
+                </li>
+                <li>
+                    <label>Description:</label>
+                    <span>{{product.description}}</span>
+                </li>
+                <li>
+                    <label>Price:</label>
+                    <span class="text-danger font-weight-bold">{{product.price | currency: 'LE' }}</span>
+                </li>
+            </ul>
+        </div>
+        <h2 class="font-weight-bold">Material:</h2>
+        <ul>
+            <li>
+                <p>{{product.material.name}}</p>
+            </li>
+        </ul>
+        <h2 class="font-weight-bold">Category:</h2>
+        <ul>
+            <li>
+                <p>{{product.category.name}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="photos"  *ngIf="options == 2">
+    <div class="justify-content-md-center " *ngFor="let photo of photos" style="position: relative;">
+        <button class="Aclas close" (click) = "removePhoto(photo.id)">
+            <span class="text-danger">&times;</span>
+        </button>
+        <img class="product_image mt-4"  src="/uploads/products/{{photo.fileName}}">
+    </div>
+    <div class="justify-content-md-center">
+        <input type="file" value="Upload" (change) = "displayUploadedImage()" #fileInput/>
+    </div>
+</div>
+
+
+<div class="mt-5">
+    <a class="btn btn-primary" [routerLink]="['/products/edit/'+product.id]" routerLinkActive="router-link-active" >Edit</a>
+    <button class="btn btn-danger" type="button" (click)= "removeProduct()">Delete</button>
+</div>

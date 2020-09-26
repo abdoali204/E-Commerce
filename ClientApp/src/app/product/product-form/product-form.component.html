@@ -1,0 +1,37 @@
+<h2 class="text-primary font-weight-bold">New Product</h2>
+       <form (ngSubmit) = "submit()" novalidate>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name"  class="form-control" [(ngModel)]="product.name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" class="form-control" [(ngModel)]="product.description" name="description">
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price"  class="form-control" [(ngModel)]="product.price" name="price">
+            </div>
+            <app-star [rating] = "product.rating" (ratingClicked) = "onClick($event)" [editable]="true"></app-star>
+            <div class="form-group">
+                <label for="price">Category:</label>
+                <select name="category" id="category" [(ngModel)]="product.categoryId" (change)= "onCategoryChange()"  class="form-control">
+                    <option value=""></option>
+                    <option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="material">Materials</label>
+                <select name="material" id="material" 
+                *ngIf="materials"
+                [(ngModel)]="product.materialId" 
+                (change) = "onMaterialChange()" 
+                class="form-control">
+                    <option value=""></option>
+                    <option *ngFor="let material of materials" value="{{material.id}}">
+                            {{material.name}}
+                    </option>
+                </select>
+            </div>
+            <button class="btn btn-success" type="submit">Save</button>
+        </form>

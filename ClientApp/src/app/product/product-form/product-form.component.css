@@ -1,0 +1,11 @@
+.Aclass{
+    right:0px;
+    position: relative;
+}
+.product_image{
+    height: 400px;
+    width: 35%;
+    position: relative;
+  
+    overflow: hidden;
+}

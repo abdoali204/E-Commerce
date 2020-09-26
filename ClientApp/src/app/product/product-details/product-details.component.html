@@ -1,0 +1,16 @@
+
+    <img *ngIf="photos" src="/uploads/products/{{photos.fileName}}" class="product_image" (click)="basket.addItemToBasket(product)">
+        <div class="product_textSection pl-4">
+            <h6 class="text-center mt-4">
+            <a [routerLink]="['/products/'+product.id]" routerLinkActive="router-link-active"  class="text-dark"> {{product.name}} </a>
+            </h6>
+            <div class="text-center">
+                    <app-star [rating] = "product.rating"  [editable] = "false" (change) = "onRatingClicked($event)" *ngIf="product.rating">
+                        
+                    </app-star>
+            </div>
+            <div class="product_price text-center">
+                {{product.price | currency : 'LE'}}
+            
+            </div>
+        </div>
