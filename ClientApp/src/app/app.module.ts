@@ -19,7 +19,6 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ProductComponent } from './product/product.component';
@@ -39,7 +38,6 @@ import { OrderListComponent } from './order/order-list/order-list.component';
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
     CounterComponent,
     FetchDataComponent,
     ProductComponent,
@@ -64,7 +62,7 @@ import { OrderListComponent } from './order/order-list/order-list.component';
     }),
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: ProductComponent, pathMatch: 'full' },
       { path:'products', component : ProductComponent},
       { path:'products/new',component: ProductFormComponent ,canActivate : [AdminAuthGuard] },
       { path:'products/:id', component : ViewProductComponent },
