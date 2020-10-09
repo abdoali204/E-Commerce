@@ -2,7 +2,7 @@ using AutoMapper;
 using E_Commerce.Core;
 using E_Commerce.Core.Models;
 using E_Commerce.Presistence;
-using E_Commerce.Core;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,7 +29,6 @@ namespace E_Commerce
             services.AddTransient<IBasketRepository,BasketRepository>();
             services.AddTransient<IShippingRepository,ShippingRepository>();
             services.AddTransient<IInvoiceRepository,InvoiceRepository>();
-            services.AddTransient<IPaymentRepository,PaymentRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IMaterialRepository,MaterialRepository>();
             services.AddScoped<IPhotoRepository,PhotoRepository>();
@@ -42,7 +41,18 @@ namespace E_Commerce
 
 
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>{
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+             services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
+            options.Authority = "https://vegacourse.us.auth0.com/";
+            options.Audience = "https://api.store.com";
+        });
             // In production, the Angular files will be served from this directory
             services.AddDbContext<ApplicationDbContext>(options=> options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddSpaStaticFiles(configuration =>

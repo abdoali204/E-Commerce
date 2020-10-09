@@ -8,13 +8,14 @@ namespace E_Commerce.Core.Models
        public int Id { get; set; }
        public DateTime Date { get; set; }
        public int TotalAmount { get; set; }
+       public float TotalPrice { get; set; }
        public string State {get;set;}
        public int PaymentId { get; set; }
        public int? InvoiceId {get;set;}
        public int ShippingId { get; set; }   
        public int BasketId {get;set;}
+       public string UserSessionId {get;set;}
        public Invoice Invoice {get;set;}
-       public Payment Payment {get;set;}
        public Shipping Shipping {get;set;} 
        public Basket Basket { get; set; }
    } 

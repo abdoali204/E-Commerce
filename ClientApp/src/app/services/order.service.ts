@@ -10,6 +10,9 @@ export class OrderService {
     getOrder(id){
         return this.http.get("/api/orders/"+id);
     }
+    getOrdersByUserId(userId){
+        return this.http.get("/api/orders/userOrders/"+userId);
+    }
     updateOrder(id,order){
         return this.http.put("/api/orders/"+id,order);
     }

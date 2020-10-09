@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { MaterialService } from './../../services/material.service';
 import { PhotoService } from './../../services/photo.service';
 import { IProductSave } from './../../models/productSave';
@@ -35,7 +36,7 @@ export class ProductFormComponent implements OnInit {
   categories: any[];
   constructor(private catService : ProductCategoryService,
               private productService : ProductService,
-              
+              private toastrService : ToastrService,
               private materialService : MaterialService,
               private router : Router,
               private route : ActivatedRoute) {
@@ -70,8 +71,11 @@ export class ProductFormComponent implements OnInit {
   submit(){
     var result$ = (this.product.id) ? this.productService.updateProduct(this.product) : this.productService.add(this.product);
     result$.subscribe(res =>{
-      console.log("Data was saved succesfully:");
+      if(res != null && res != undefined)
+      {
+        this.toastrService.success("Data was saved sucessfuly","Success...")
       this.router.navigate(['products']);
+      }
     });
    
   }

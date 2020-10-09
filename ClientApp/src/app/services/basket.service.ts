@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { PhotoService } from './photo.service';
 import { IItem } from './../models/IItem';
 import { IProduct } from './../models/product';
@@ -21,7 +22,8 @@ export class BasketService {
     };
   totalItems : number =0;
   constructor(private http : HttpClient,
-              private photoService : PhotoService) {
+              private photoService : PhotoService,
+              private toastrService : ToastrService) {
       if(!this.isStoredBasket()){
           this.createBasket();
           console.log("Saved Basket Constructor Not True : " + JSON.stringify(this.saveBasket));
@@ -41,7 +43,8 @@ export class BasketService {
   updateBasket(id : number,basket : ISaveBasket){
     return this.http.put<IBasket>("/api/baskets/"+id,basket).subscribe(basket => {this.setBasket(basket);
     console.log(JSON.stringify(this.basket));
-    
+    if(basket != null && basket != undefined)
+      this.toastrService.info("Data saved successfully","saved",{timeOut:500,closeButton:true});
     });
   }
   deleteBasket(id: number){

@@ -1,21 +1,11 @@
-<ul class="nav nav-tabs">
-    <li class="nav-item active">
-        <button class="nav-link" (click) = "onChangeOption(1)">Shipping</button>
-    </li>
-    <li class="nav-item" (click) = "onChangeOption(2)">
-        <button  class="nav-link" id="photosBtn">Payment</button>
-    </li>
-</ul>
 
-<div class="mt-4">
-    <div id="address" *ngIf="options ==1">
-        <app-shipping>
+<div class="mt-4 row">
+    <div class="col-sm-8">
+        <div id="address" *ngIf="options ==1">
+            <app-shipping (shippingClick) = shippingConfirm($event)>
 
-        </app-shipping>
+            </app-shipping>
+        </div>
     </div>
-    <div id="payment" *ngIf="options ==2">
-        <app-payment>
-            
-        </app-payment>
-    </div>
+
 </div>

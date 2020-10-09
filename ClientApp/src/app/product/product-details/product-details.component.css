@@ -4,3 +4,13 @@
     position: relative;
     overflow: hidden;
 }
+.addToCart:hover{
+    color:blue !important;
+    transition:600ms ease-in-out;
+    cursor: pointer;
+}
+#orderDetails ul li h4{
+    color:black,
+    
+
+}

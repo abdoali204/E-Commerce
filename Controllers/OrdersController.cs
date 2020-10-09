@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using E_Commerce.Controllers.Resources;
@@ -14,17 +15,27 @@ namespace E_Commerce.Controllers
         private readonly IOrderRepository orderRepository;
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+        private readonly IBasketRepository basketRepository;
 
-        public OrdersController(IOrderRepository orderRepository , IUnitOfWork unitOfWork,IMapper mapper)
+        public OrdersController(IOrderRepository orderRepository , IUnitOfWork unitOfWork,IMapper mapper,
+                                IBasketRepository basketRepository)
         {
             this.orderRepository = orderRepository;
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            this.basketRepository = basketRepository;
         }
         [HttpGet]
-        public IActionResult GetOrder()
+        public IActionResult GetOrders()
         {
             return Ok(orderRepository.GetOrders());
+        }
+
+        [Route("/api/orders/userOrders/{userId}")]
+        
+        public IActionResult GetOrdersByUserId(string userId)
+        {
+            return Ok(orderRepository.GetOrdersByUserId(userId));
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOrderAsync(int id)
@@ -42,7 +53,14 @@ namespace E_Commerce.Controllers
             var order =  mapper.Map<SaveOrderResource,Order>(saveOrder);
             order.Date = DateTime.Now;
             order.State = "Placed";
+            if(saveOrder.InvoiceId == 0)
+                 order.InvoiceId = null;
+            if(saveOrder.TotalAmount == 0)
+                order.TotalAmount = 1;
             orderRepository.AddOrder(order);
+            await unitOfWork.CompleteAsync();
+            order =await orderRepository.GetOrderAsync(order.Id);
+            order.TotalPrice = basketRepository.CalcBasketCost(order.Basket) * order.TotalAmount;
             await unitOfWork.CompleteAsync();
             var orderResource = mapper.Map<Order,OrderResource>(order);
             return Ok(orderResource);

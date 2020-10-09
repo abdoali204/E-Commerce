@@ -10,5 +10,6 @@ namespace E_Commerce.Core
         void DeleteBasket(Basket Basket);
         IEnumerable<Basket> GetBaskets();
         Task<Basket> GetBasketAsync(int id);
+        float CalcBasketCost(Basket basket);
     }
 }

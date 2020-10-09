@@ -9,15 +9,11 @@ namespace E_Commerce.Controllers.Resources
        public int Id { get; set; }
        public DateTime Date { get; set; }
        public int TotalAmount { get; set; }
+       public float TotalPrice { get; set; }
        public string State {get;set;}
        public InvoiceResource Invoice {get;set;}
-       public PaymentResource Payment {get;set;}
        public ShippingResource Shipping {get;set;}      
        
-       public ICollection<OrderDetailsResource> OrderDetails { get; set; }
-       public OrderResource()
-       {
-           OrderDetails = new Collection<OrderDetailsResource>();
-       }
+       public BasketResource BasketResource { get; set; }
     }
 }

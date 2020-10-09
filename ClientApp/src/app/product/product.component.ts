@@ -1,7 +1,9 @@
+import { Router } from '@angular/router';
 import { BasketService } from './../services/basket.service';
 import { ProductCategoryService } from './../services/product-category.service';
 import { ProductService } from './../services/product.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-product',
@@ -18,14 +20,17 @@ export class ProductComponent implements OnInit {
 
   products : any[];
   constructor(private productService: ProductService,
-              private categoryService: ProductCategoryService) { }
+              private categoryService: ProductCategoryService,
+              private auth: AuthService,
+              private router : Router) { }
   
   ngOnInit() {
    this.populateProducts();
    this.categoryService.getCategories().subscribe(cats => this.categories = cats);
   }
-  onFilterChange()
+  onFilterChange(cat : string)
   {
+    this.query.categoryName = cat;
     console.log("Filter "+ JSON.stringify(this.query));
     this.query.page = 1;
     this.query.pageSize = this.PAGE_SIZE;

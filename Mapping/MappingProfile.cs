@@ -13,6 +13,7 @@ namespace E_Commerce.Mapping
         public MappingProfile()
         {
             //from Domain to API RESOURCE
+            CreateMap<Order,OrderResource>();
             CreateMap<Basket,BasketResource>();
             CreateMap(typeof(QueryResult<>),typeof(QueryResultResource<>));
             CreateMap<Invoice,InvoiceResource>();
@@ -23,7 +24,7 @@ namespace E_Commerce.Mapping
                     .ForMember(odr => odr.ProductId , opt=> opt.MapFrom( od => od.ProductId))
                     .ForMember(odr => odr.Price , opt => opt.MapFrom(od => od.Product.Price))
                     .ForMember(odr => odr.FileName , Opt => Opt.MapFrom(od => od.Product.Photos.Select(photo => photo.FileName).SingleOrDefault()));
-            CreateMap<Payment,PaymentResource>();
+        
             CreateMap<Photo, PhotoResource>();
             CreateMap<Photo, KeyValuePairResource>();
             CreateMap<Material , KeyValuePairResource>();
@@ -35,7 +36,6 @@ namespace E_Commerce.Mapping
                                                                                         Name = ph.FileName})))
                     .ForMember(pr => pr.ProductMaterial, opt => opt.MapFrom(p => new KeyValuePairResource{Id = p.Material.Id, Name = p.Material.Name}));
             //from API Resource To Domain
-            CreateMap<SavePaymentResource,Payment>();
             CreateMap<SaveAddressResource, Address>()
                     .ForMember(s => s.Id, opt => opt.Ignore());
             CreateMap<SaveOrderDetailsResource,OrderDetails>()
@@ -67,6 +67,7 @@ namespace E_Commerce.Mapping
                            var addedItems = br.BasketItems.Where( item => !b.BasketItems.Any(i => i.ProductId == item.ProductId)).Select(item => new OrderDetails(){
                                    ProductId = item.ProductId,
                                    Quantity = item.Quantity
+                                
                            });
                            foreach(var item in addedItems.ToList()){
                                    b.BasketItems.Add(item);

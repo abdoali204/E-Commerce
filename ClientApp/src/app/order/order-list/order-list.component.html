@@ -1,0 +1,37 @@
+<h2 class="text-danger font-weight-bold">
+    Orders
+</h2>
+<table *ngIf="orders.length > 0" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Total Price
+            </th>
+            <th>
+                State
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orders">
+            <td>
+                #{{order.id}}
+            </td>
+            <td>
+                {{order.date | date}}
+            </td>
+            <td>
+                {{order.totalPrice}}
+            </td>
+            <td class="font-weight-bold text-success">
+                {{order.state}}
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,5 +1,5 @@
 
-    <img *ngIf="photos" src="/uploads/products/{{photos.fileName}}" class="product_image" (click)="basket.addItemToBasket(product)">
+    <img *ngIf="photos" src="/uploads/products/{{photos.fileName}}" class="product_image" >
         <div class="product_textSection pl-4">
             <h6 class="text-center mt-4">
             <a [routerLink]="['/products/'+product.id]" routerLinkActive="router-link-active"  class="text-dark"> {{product.name}} </a>
@@ -9,8 +9,10 @@
                         
                     </app-star>
             </div>
-            <div class="product_price text-center">
+            <div class="product_price text-danger font-weight-bold pull-left">
                 {{product.price | currency : 'LE'}}
-            
+            </div>
+            <div class="pull-right addToCart font-weight-bold text-warning" (click)="basket.addItemToBasket(product)">
+                Add to cart <i class="fa fa-cart-plus"></i>
             </div>
         </div>

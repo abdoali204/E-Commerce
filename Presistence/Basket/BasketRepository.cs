@@ -34,5 +34,8 @@ namespace E_Commerce.Presistence
         {
             return context.Baskets.Include(b=> b.BasketItems.Select(bi => bi.Product));   
         }
+        public float CalcBasketCost(Basket basket){
+            return basket.BasketItems.Select(item => item.Product.Price * item.Quantity).Sum();
+        }
     }
 }

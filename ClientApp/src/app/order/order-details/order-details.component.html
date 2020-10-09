@@ -1,0 +1,39 @@
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-success">
+                Success.. <i class="rounded-circle fa fa-check text-success font-weight-bold"></i>
+            </h2>
+        </div>
+        <div class="card-body d-flex row">
+
+            <div id="orderDetails" class="d-flex col-sm-12 justify-content-center mt-5" *ngIf="order">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h2 class="text-warning font-weight-bold">Order Details</h2>
+                    </li>
+                    <li class="list-group-item ">
+                        <h4>totalPrice:<strong>{{order.totalPrice}}</strong> </h4>
+                    </li>
+                    <li class="list-group-item ">
+                        <h4>Total Amount:<strong>{{order.totalAmount}}</strong> </h4>
+                    </li>
+                    <li class="list-group-item ">
+                        <h4>State:<strong>{{order.state}}</strong></h4>
+                    </li>
+                    <li class="list-group-item">  
+                        <h4>Shipping Charge:<strong>{{order.shipping.shippingCharge}}</strong></h4>    
+                    </li>
+                    <li class="list-group-item ">
+                        <h4>Shipping Method:<strong>{{order.shipping.shippingMethod}}</strong></h4>
+                    </li>
+                    <li class="list-group-item list-group-item-dark">
+                        <a [routerLink]="['/products']" class="btn btn-info">Go to products</a>
+                        <button class="btn btn-danger" (click)="deleteOrder()" *ngIf="order.state == 'Placed'">
+                            Delete
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

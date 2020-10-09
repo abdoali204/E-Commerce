@@ -9,7 +9,6 @@ namespace E_Commerce.Presistence
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Photo> Photos {get;set;}
         public DbSet<Product> Products {get;set;}
-        public DbSet<Payment> Payments { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Shipping> Shippings { get; set; }

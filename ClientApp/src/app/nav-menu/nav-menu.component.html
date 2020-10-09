@@ -35,13 +35,21 @@
             <a class="nav-link text-dark" [routerLink]="['/products']">Products</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
+            <a class="nav-link text-dark" [routerLink]="['/order/list']"
+              >Orders</a
             >
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/basket']"
               ><span>{{basket.basket.totalItems}}</span> <i class="fa fa-shopping-cart text-primary"></i></a
+            >
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" (click) = "auth.login()" *ngIf="!auth.loggedIn" style="cursor: pointer;">
+              <span class="text-primary">Login</span> <i class="fa fa-sign-in"></i></a
+            >
+            <a class="nav-link text-dark" (click) = "auth.logout()" *ngIf="auth.loggedIn" style="cursor: pointer;">
+              <span class="text-primary">Logout</span> <i class="fa fa-sign-out"></i></a
             >
           </li>
         </ul>

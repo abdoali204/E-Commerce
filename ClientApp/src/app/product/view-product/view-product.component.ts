@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from './../../services/product.service';
 import { IProduct } from 'src/app/models/product';
@@ -37,7 +38,8 @@ export class ViewProductComponent implements OnInit {
   constructor(private photoService : PhotoService,
               private productService : ProductService,
               private router : Router,
-              private route : ActivatedRoute) { 
+              private route : ActivatedRoute,
+              private auth : AuthService) { 
                 route.params.subscribe(p=>{
                   this.productId = +p['id'] || 0;
               });

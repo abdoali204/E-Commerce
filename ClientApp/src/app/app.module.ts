@@ -1,5 +1,10 @@
+import { AuthGuard } from './services/auth-guard.service';
+import { AdminAuthGuard } from './services/admin-auth-guard.service';
+import { OrderDetailsComponent } from './order/order-details/order-details.component';
+
+import { ToastrModule } from 'ngx-toastr';
+import { AppErrorHandler } from './app.error-handler';
 import { OrderComponent } from './order/order.component';
-import { PaymentService } from './services/payment.service';
 import { ShippingService } from './services/shipping.service';
 import { ShippingComponent } from './basket/shipping/shipping.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
@@ -7,7 +12,7 @@ import { ProductCategoryService } from './services/product-category.service';
 import { PhotoService } from './services/photo.service';
 import { ProductService } from './services/product.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -23,8 +28,9 @@ import { ProductFormComponent } from './product/product-form/product-form.compon
 import { StarComponent } from './shared/star/star.component';
 import { ViewProductComponent } from './product/view-product/view-product.component';
 import { BasketComponent } from './basket/basket.component';
-import { PaymentComponent } from './basket/payment/payment.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthModule } from '@auth0/auth0-angular';
+import { OrderListComponent } from './order/order-list/order-list.component';
 
 
 
@@ -44,33 +50,43 @@ import { PaymentComponent } from './basket/payment/payment.component';
     PaginationComponent,
     BasketComponent,
     ShippingComponent,
-    PaymentComponent,
-    OrderComponent
+    OrderComponent,
+    OrderDetailsComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+   
     HttpClientModule,
+    AuthModule.forRoot({
+      domain: 'vegacourse.us.auth0.com',
+      clientId: 'p2XJ30J1dCnOd58ZCfPVVq5uF2CMJjf2'
+    }),
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path:'products', component : ProductComponent},
-      { path:'products/new',component: ProductFormComponent },
+      { path:'products/new',component: ProductFormComponent ,canActivate : [AdminAuthGuard] },
       { path:'products/:id', component : ViewProductComponent },
-      { path:'order',component : OrderComponent},
+      { path:'order',component : OrderComponent , canActivate : [AuthGuard]},
+      { path:'order/list',component : OrderListComponent , canActivate : [AuthGuard]},
+      { path:'order/:id',component : OrderDetailsComponent},
       { path:'basket',component : BasketComponent},
-      { path:'shipping',component : ShippingComponent},
-      { path:'payment',component : PaymentComponent},
-      { path:'products/edit/:id',component: ProductFormComponent },
+      { path:'shipping',component : ShippingComponent, canActivate: [AuthGuard]},
+      { path:'products/edit/:id',component: ProductFormComponent,canActivate : [AdminAuthGuard] },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    ]),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     ProductService,
     PhotoService,
     ProductCategoryService,
     ShippingService,
-    PaymentService
+    AuthGuard,
+    AdminAuthGuard
   ],
   bootstrap: [AppComponent]
 })

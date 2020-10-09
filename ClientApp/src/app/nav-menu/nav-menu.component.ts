@@ -1,5 +1,6 @@
 import { BasketService } from './../services/basket.service';
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,7 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-  constructor(private basket : BasketService){
+  constructor(private basket : BasketService,
+            private auth : AuthService){
 
   }
   isExpanded = false;

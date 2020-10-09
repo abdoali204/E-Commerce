@@ -1,19 +1,20 @@
  <h4 class="text-uppercase"><span class="border-bottom border-danger">Our</span> Products</h4>
- <div class="row border-bottom border-light bg-light p-3">
+ <div class="row border-bottom border-light p-3">
      <div class="col-sm-4">
-        <a [routerLink]= "['/products/new']" class="btn btn-primary">New Product</a>
+        <a [routerLink]= "['/products/new']" class="btn btn-primary" *ngIf="auth.isInRole('Admin')">New Product</a>
      </div>
      <div class="col-sm-4"></div>
     <div class="form-group col-sm-4 justify-content-end">
-        <select name="categories" id="categories" class="form-control" [(ngModel)]="query.categoryName" (change)="onFilterChange()">
-            <option value=""></option>
-            <option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</option>
-        </select>
+        <ul class="nav nav-tabs">
+            <li class="nav-item" *ngFor="let cat of categories">
+                <a class="nav-link" data-toggle="tab" role="tab" href="#" (click) = "onFilterChange(cat.name)">{{cat.name}}</a>
+            </li>
+        </ul>
     </div>
 </div>
- <button type="button" class="btn btn-secondry" (click)="resetFilters()">
-     Reset Filters
- </button>
+    <button type="button" class="btn btn-warning btn-lg" (click)="resetFilters()">
+        Reset Filters
+    </button>
  <div class="row well product-list">
         <div *ngFor="let product of queryResult.items" class="col-md-4 p-5 product">
             <app-product-details [product]='product'></app-product-details>
