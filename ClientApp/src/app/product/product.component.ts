@@ -28,9 +28,10 @@ export class ProductComponent implements OnInit {
    this.populateProducts();
    this.categoryService.getCategories().subscribe(cats => this.categories = cats);
   }
-  onFilterChange(cat : string)
+  onFilterChange(cat)
   {
     this.query.categoryName = cat;
+    console.log("hey");
     console.log("Filter "+ JSON.stringify(this.query));
     this.query.page = 1;
     this.query.pageSize = this.PAGE_SIZE;

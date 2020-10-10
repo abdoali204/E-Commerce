@@ -19,8 +19,6 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { ProductFormComponent } from './product/product-form/product-form.component';
@@ -38,8 +36,6 @@ import { OrderListComponent } from './order/order-list/order-list.component';
   declarations: [
     AppComponent,
     NavMenuComponent,
-    CounterComponent,
-    FetchDataComponent,
     ProductComponent,
     ProductDetailsComponent,
     ProductFormComponent,
@@ -71,9 +67,8 @@ import { OrderListComponent } from './order/order-list/order-list.component';
       { path:'order/:id',component : OrderDetailsComponent},
       { path:'basket',component : BasketComponent},
       { path:'shipping',component : ShippingComponent, canActivate: [AuthGuard]},
-      { path:'products/edit/:id',component: ProductFormComponent,canActivate : [AdminAuthGuard] },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path:'products/edit/:id',component: ProductFormComponent,canActivate : [AdminAuthGuard] }
+    
     ]),
     BrowserAnimationsModule,
     ToastrModule.forRoot()

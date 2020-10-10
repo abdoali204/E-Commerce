@@ -3,10 +3,10 @@
 /* Provide sufficient contrast against white background */
 
 @import "~font-awesome/css/font-awesome.min.css";
+@import url("https://fonts.google.com/specimen/Cookie");
 a {
   color: #0366d6;
 }
-
 code {
   color: #e01a76;
 }

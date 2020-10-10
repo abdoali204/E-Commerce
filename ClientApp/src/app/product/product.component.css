@@ -4,3 +4,59 @@
 .product{
     background-color: white;
 }
+.category_large_item{
+    height: 638px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.category_text{
+    font-family: "Montserrat", sans-serif;
+}
+.category_text h1{
+    font-family: "Cookie", cursive;
+    margin-bottom: 5px;
+}
+.category_text h5{
+    color:white
+}
+.category_item{
+    height: 314px;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.category_item_sm{
+    height:319px;
+    display: flex;
+    align-items: center;
+    padding-left: 3px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+a{
+    transition: 3s;
+}
+.carousel-item{
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+.carousel-item img{
+    height: 350px;
+    width: 40%;
+    margin: auto;
+}
+.carousel-caption{
+    color: black;
+}
+.carousel-caption h5{
+    font-weight: bold;
+    font-family: "Cookie";
+}
